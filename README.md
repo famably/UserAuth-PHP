@@ -1,24 +1,126 @@
-# Prerequisites for the task
+# User Authentication System (PHP 8 + SQLite)
 
-- Install PHP with SQLite (if you are on mac this will come preinstalled when you brew install php)
+## Overview
+This repository contains a lightweight, production-ready **user authentication system** built with PHP 8 and SQLite.  
+The project demonstrates secure credential handling, modern PHP standards, clean architecture, and extensible components for managing user accounts.
 
-# Introduction
+The system includes:
+- Secure registration  
+- Password hashing  
+- Safe login validation  
+- Persistent storage via SQLite  
+- A refactored architecture using a dedicated UserRepository  
 
-The code inside index.php contains a simple UserAuth class which can register and log in a user. Users are stored inside an SQLite database. At the end of the file there is some code instantiating the class and testing the register and log in functions.
-The code is incomplete and contains some bugs, as well as not following some best practices. There are also some TODOs that have been left in the code.
+This structure makes the project ideal for small applications, prototypes, internal tools, or foundational authentication modules.
 
-# Instructions
+---
 
-We would like you to fix the bugs so that the script runs without exceptions.
-Implement the TODOs, and think about how the code might be brought into line with modern PHP practices, for example using typing for variables and return types in method declarations.
-There might also be some potential security issues with the code, if you imagine the input for the register/login methods might come from an external user.
+## Features
 
-Essentially don't be afraid of changing too much, give the code a good tidy up and get it to a production ready standard. This task should take somewhere between 1-2 hours, as a ballpark.
+- **Modern PHP 8 Codebase**
+  - Strong typing  
+  - Return types  
+  - Exceptions for error handling  
+  - Separation of concerns  
 
-When complete, zip your code and email it back to us.
+- **User Registration & Login**
+  - Secure hashing using `password_hash()`  
+  - Constant‑time password checks via `password_verify()`  
+  - Input validation and error handling  
 
-# Running the script
-`php index.php`
+- **SQLite-Powered Persistence**
+  - Lightweight, dependency-free database  
+  - Automatic table creation  
+  - Clean repository abstraction  
 
-# Bonus task
-Implement a UserRepository class for handling the database interactions, and refactor out the code. This can be added to the same index.php file for simplicity.
+- **UserRepository Layer**
+  - Encapsulates all database logic  
+  - Improves testability  
+  - Prevents SQL injection via prepared statements  
+
+- **Minimal Bootstrap Script**
+  - `index.php` acts as the entrypoint  
+  - Orchestrates repository and auth service  
+
+---
+
+## Tech Stack
+
+| Component | Technology |
+|----------|------------|
+| Language | PHP 8.x |
+| Database | SQLite |
+| Storage Layer | PDO |
+| Architecture | OOP + Repository Pattern |
+
+---
+
+## Running the Project
+
+### 1. Ensure PHP (with SQLite) is installed
+Mac users:  
+```bash
+brew install php
+```
+
+Linux users:  
+```bash
+sudo apt install php php-sqlite3
+```
+
+Windows users:  
+Use official PHP builds with `php_pdo_sqlite`.
+
+### 2. Run the script
+```bash
+php index.php
+```
+
+The script will:
+- Create the SQLite database (if missing)  
+- Create the users table  
+- Demonstrate registration and login operations  
+
+---
+
+## Project Structure
+
+```
+index.php              # Entrypoint: bootstraps the system
+UserAuth.php           # Auth logic (registration + login)
+UserRepository.php     # Data access abstraction layer
+database.sqlite        # SQLite database (auto-created)
+README.md
+```
+
+---
+
+## Security Practices Implemented
+
+- Password hashing  
+- Prepared statements for all queries  
+- Input validation  
+- Protected database interactions  
+- No plaintext credential storage  
+- Clear exception handling  
+
+This aligns the system with real-world secure application guidelines.
+
+---
+
+## Extensibility
+
+This project is intentionally minimal but easy to expand:
+- Add JWT tokens or sessions  
+- Add user roles & permissions  
+- Replace SQLite with MySQL/PostgreSQL  
+- Add email verification  
+- Add dependency injection container  
+- Move classes into `src/` and use Composer autoloading  
+
+---
+
+## Summary
+
+This repository contains a clean, secure, and modern PHP authentication backend using SQLite and OOP best practices.  
+It can serve as a standalone user system or a foundation for more complex applications requiring authentication logic.
